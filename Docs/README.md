@@ -11,7 +11,8 @@ O projeto, feito na linguagem Python, é um E-commerce de venda e compra de ingr
 
 
 ## Backlog do produto
-- Dia (27/06)
+- Dia (27/06) - Backlog Sprint 1, Organização do backlog.
+![Backlog Sprint 1](img/backlog1.png "Divisão de ")
 - Dia (28/06)
 
 
