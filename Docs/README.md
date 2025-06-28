@@ -7,7 +7,7 @@ Diagrama do sistema, apresentando atributos e seus tipos, métodos com seus para
 
 ## Apresentação
 Este é um projeto feito por Vinícius Simões como entregavel para uma atividade da disciplina Fundamentos de Software do 1° período do curso.
-O projeto, feito na linguagem Python, é um E-commerce de venda e compra de ingressos, contando com função de contas (cinema e cliente), permitindo que o cinema adicione ou remova filmes em cartaz e que clientes possam vizualizar os filmes disponiveis para compra do ingresso e acompanhar os ingressos já adquiridos.
+O projeto, feito na linguagem Python, é um E-commerce de venda e compra de produtos, contando com função de contas (vendedor e cliente), permitindo que o vendedor gerencie produtos em estoque e que clientes possam vizualizar os produtos disponiveis para compra e visualizar sua nota fiscal após finalizar a compra.
 
 
 ## Backlog do produto
