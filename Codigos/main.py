@@ -22,11 +22,12 @@ def printMenu (tipoMenu):
             print ("*", " 4 - Gerenciar Compradores", "*")
             print ("*", " 0 - SAIR", " " * 16, "*")
             print ("*" * 30)
-        case "venda":
+        case "GVenda":
             print ("*" * 11, " VENDA ", "*" * 10)
-            print ("*", " 1 - Ver produtos"     , " " * 8, "*")
-            print ("*", " 2 - Chamar vendedores", " " * 3, "*")
-            print ("*", " 3 - Comprar Produto"  , " " * 5, "*")
+            print ("*", " 1 - Ver Produtos"        , " " * 8, "*")
+            print ("*", " 2 - Chamar Vendedor"     , " " * 5, "*")
+            print ("*", " 3 - Colocar no Carrinho" , " " * 1, "*")
+            print ("*", " 4 - Emitir Notas Fiscais", " " * 0, "*")
             print ("*", " 0 - VOLTAR", " " * 14, "*")
             print ("*" * 30)
         case "GProdutos":
@@ -48,10 +49,18 @@ def printMenu (tipoMenu):
         case "GCompradores":
             print ("*" * 8, " COMPRADORES ", "*" * 8)
             print ("*", " 1 - Adicionar Compradores", " *")
-            print ("*", " 2 - Remover Compradores"  , " " * 2 , "*")
-            print ("*", " 3 - Listar Compradores"   , " " * 3 , "*")
-            print ("*", " 0 - VOLTAR  "               , " " * 13, "*")
+            print ("*", " 2 - Listar Compradores"   , " " * 3 , "*")
+            print ("*", " 3 - Atualizar Compradores", " " * 0 , "*")
+            print ("*", " 4 - Remover Compradores"  , " " * 2 , "*")
+            print ("*", " 0 - VOLTAR  "             , " " * 13, "*")
             print ("*" * 31)
+
+## Gerenciar Vendas ##
+# Atributos
+codVenda:int   # auto incremeto
+cpf_comprador: str
+cod_vendedor: int
+cod_produto: int
 
 ## Gerenciar Produtos ##
 # Atributos
@@ -77,7 +86,7 @@ def criar_produto (codProduto, nomeProduto, qtdeEstoque, precoUnitario):
         with open ("produto.txt", "a") as f:
             f.write(f"{codProduto}, {nomeProduto}, {qtdeEstoque}, {precoUnitario}\n")
             print (f"Produto {nomeProduto} adicionado com sucesso.")
-        
+
 # ler produto (cRud)
 def ler_produto ():
     try:
@@ -207,7 +216,7 @@ def atualizar_vendedor (antigo_nomeVendedor, novo_nomeVendedor, novo_salarioFixo
         print ("Arquivo não encontrado.")
 
 # Deletar vendedor
-def deletar_vendedor (apague_codVendedor):
+def deletar_vendedor (apagar_codVendedor):
     try:
         # receber lista
         with open ("vendedor.txt", "r") as f:
@@ -218,14 +227,14 @@ def deletar_vendedor (apague_codVendedor):
             encontrado = False
             for linha in linhas:
                 codVendedor, nomeVendedor, salarioFixo, comissao = linha.strip().split(",")
-                if apague_codVendedor == codVendedor:
+                if apagar_codVendedor == codVendedor:
                     encontrado = True
-                    print(f"Vendedor(a) {nomeVendedor}, de código {apague_codVendedor}, foi deletado(a).")
+                    print(f"Vendedor(a) {nomeVendedor}, de código {apagar_codVendedor}, foi deletado(a).")
                 else:
                     f.write(linha)
                 
                 if not encontrado:
-                    print (f"O código {apague_codVendedor}, não foi encontrado.")
+                    print (f"O código {apagar_codVendedor}, não foi encontrado.")
     
     except FileNotFoundError:
         print ("Arquivo não encontrado.")
@@ -301,7 +310,7 @@ def atualizar_comprador (antigo_cpf, novo_cpf, novo_email, novo_nomeComprador, n
             encontrado = False
             for linha in linhas:
                 cpf, email, nomeComprador, cep, rua, bairro, cidade, estado = linha.strip().split(",")
-                if novo_cpf == antigo_cpf:
+                if cpf == antigo_cpf:
                     f.write (f"{novo_cpf}, {novo_email}, {novo_nomeComprador}, {novo_cep}, {novo_rua}, {novo_bairro}, {novo_cidade}, {novo_estado}\n")
                     encontrado = True
                     print (f"O(a) compador(a) {novo_nomeComprador}, foi atualizado com sucesso.")
@@ -314,26 +323,26 @@ def atualizar_comprador (antigo_cpf, novo_cpf, novo_email, novo_nomeComprador, n
     except FileNotFoundError:
         print ("Arquivo não encontrado.")
 
-# Deletar vendedor
-def deletar_vendedor (apague_codVendedor):
+# Deletar comprador
+def deletar_comprador (apagar_cpf):
     try:
         # receber lista
-        with open ("vendedor.txt", "r") as f:
+        with open ("comprador.txt", "r") as f:
             linhas = f.readlines( )
 
-        # buscar codigo do vendedor a ser deletado
-        with open ("vendedor.txt", "w") as f:
+        # buscar codigo do comprador a ser deletado
+        with open ("comprador.txt", "w") as f:
             encontrado = False
             for linha in linhas:
-                codVendedor, nomeVendedor, salarioFixo, comissao = linha.strip().split(",")
-                if apague_codVendedor == codVendedor:
+                cpf, email, nomeComprador, cep, rua, bairro, cidade, estado = linha.strip().split(",")
+                if apagar_cpf == cpf:
                     encontrado = True
-                    print(f"Vendedor(a) {nomeVendedor}, de código {apague_codVendedor}, foi deletado(a).")
+                    print(f"Comprador(a) {nomeComprador}, de CPF {apagar_cpf}, foi deletado(a).")
                 else:
                     f.write(linha)
                 
                 if not encontrado:
-                    print (f"O código {apague_codVendedor}, não foi encontrado.")
+                    print (f"O código {apagar_cpf}, não foi encontrado.")
     
     except FileNotFoundError:
         print ("Arquivo não encontrado.")
@@ -359,7 +368,7 @@ def main():
                 # Gerenciar Venda FAZER!!
                 case 1:
                     print ("\n")
-                    printMenu("venda")
+                    printMenu("GVenda")
                     entrada = int (input("Digite o menu desejado:  "))
                     match entrada:
                         case 1:
@@ -442,6 +451,47 @@ def main():
                 case 4:
                     print ("\n")
                     printMenu("GCompradores")
+
+                    # navegar menu
+                    entrada = int (input("Digite o menu desejado:  "))
+                    match entrada:
+                        # Criar comprador
+                        case 1:
+                            cpf = input ("Entre com o CPF:  ")
+                            email = input ("Entre com o email:  ")
+                            nomeComprador = input ("Entre com o nome:  ")
+                            cep = input ("Entre com o CEP:  ")
+                            rua = input ("Entre com o Rua:  ")
+                            bairro = input ("Entre com o Bairro:  ")
+                            cidade = input ("Entre com o Cidade:  ")
+                            estado = input ("Entre com o Estado (Ex.: AA):  ")
+                            criar_comprador (cpf, email, nomeComprador, cep, rua, bairro, cidade, estado)
+                            
+                        # Listar compradores
+                        case 2:
+                            ler_comprador()
+                        
+                        # Atualizar comprador
+                        case 3:
+                            antigo_cpf = input ("Entre com o CPF antigo:  ")
+                            novo_cpf = input ("Entre com novo CPF:  ")
+                            novo_email = input ("Entre com o email:  ")
+                            novo_nomeComprador = input ("Entre com o nome:  ")
+                            novo_cep = input ("Entre com o CEP:  ")
+                            novo_rua = input ("Entre com o Rua:  ")
+                            novo_bairro = input ("Entre com o Bairro:  ")
+                            novo_cidade = input ("Entre com o Cidade:  ")
+                            novo_estado = input ("Entre com o Estado (Ex.: AA):  ")
+                            atualizar_comprador(antigo_cpf, novo_cpf, novo_email, novo_nomeComprador, novo_cep, novo_rua, novo_bairro, novo_cidade, novo_estado)
+                        
+                        # Deletar comprador
+                        case 4:
+                            apagar_cpf = input ("Identifique quem deseja apagar. Qual o CPF?  ")
+                            deletar_comprador (apagar_cpf)
+
+                        # Voltar menu
+                        case 0:
+                            print ("Vontando para o inicio... \n")
 
                 # Encerrar sistema
                 case 0:
