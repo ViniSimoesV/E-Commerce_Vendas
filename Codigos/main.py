@@ -40,9 +40,10 @@ def printMenu (tipoMenu):
         case "GVendedores":
             print ("*" * 8, " Vendedores ", "*" * 8)
             print ("*", " 1 - Adicionar Vendedores", " *")
-            print ("*", " 2 - Remover Vendedores"  , " " * 2 , "*")
-            print ("*", " 3 - Listar Vendedores"   , " " * 3 , "*")
-            print ("*", " 0 - VOLTAR  "              , " " * 12, "*")
+            print ("*", " 2 - Listar Vendedores"   , " " * 3 , "*")
+            print ("*", " 3 - Atualizar Vendedores", " " * 0 , "*")
+            print ("*", " 4 - Remover Vendedores"  , " " * 2 , "*")
+            print ("*", " 0 - VOLTAR  "            , " " * 12, "*")
             print ("*" * 30)
         case "GCompradores":
             print ("*" * 8, " COMPRADORES ", "*" * 8)
@@ -57,18 +58,21 @@ def printMenu (tipoMenu):
 codProduto = int
 nomeProduto = str
 qtdeEstoque = int
-precoUnitario = 10.0
+precoUnitario:float = 10.0
 
 # adicionar produto (Crud)
 def criar_produto (codProduto, nomeProduto, qtdeEstoque, precoUnitario):
+    # Verifica se já existe
     with open ("produto.txt", "r") as f:
         linhas = f.readlines()
         encontrado = False
         for linha in linhas:
             if codProduto in linha:
                 encontrado = True
+    # Já existe. Cancela.
     if encontrado == True:            
         print (f"Erro! Produto de codigo {codProduto} já existe. Ação interrompida.")
+    # Nao existe. Cria novo.
     else:
         with open ("produto.txt", "a") as f:
             f.write(f"{codProduto}, {nomeProduto}, {qtdeEstoque}, {precoUnitario}\n")
@@ -129,7 +133,210 @@ def deletar_produto (codProduto):
 
 ## Gerenciar Vendedores ##
 # Atributos
+codVendedor: int 
+nomeVendedor = str
+salarioFixo:float = 10.0
+comissao:float = 10.0
 
+# autoincremente cod
+def gerar_prox_codVendedor ():
+    try:
+        with open ("vendedor.txt", "r") as f:
+            linhas = f.readlines()
+
+            if not linhas:
+                return 1
+            
+            ultimo_codVendedor = [int(linha.split(",")[0]) for linha in linhas]
+            return max (ultimo_codVendedor) + 1
+        
+    except FileNotFoundError:
+        print ("Arquivo não encontrado")
+
+# Criar vendedor
+# Cod com autoincremente
+def criar_vendedor (nomeVendedor, salarioFixo):
+    try:
+        # recebe codVendedor atual
+        codVendedor = gerar_prox_codVendedor()
+        
+        # escreve novo vendedor
+        with open ("vendedor.txt", "a") as f:
+            comissao = 0.00
+            f.write (f"{codVendedor}, {nomeVendedor}, {salarioFixo}, {comissao}\n")
+            print (f"O vendedor {nomeVendedor}, de codigo {codVendedor}, foi registrado com sucesso.")
+
+    except FileNotFoundError:
+        print ("Arquivo não encontrado")
+
+# Ler vendedor
+def ler_vendedor ( ):
+    try:
+        with open ("vendedor.txt", "r") as f:
+            for linha in f:
+                codVendedor, nomeVendedor, salarioFixo, comissao = linha.strip().split(",")
+                salarioMes = salarioFixo + comissao
+                print (f"{nomeVendedor}, cód:{codVendedor}. Salario fixo: {salarioFixo}, Comissão acumulada: {comissao}, Salario do mês: {salarioMes}")
+
+    except FileNotFoundError:
+        print ("Arquivo não encontrado.")
+
+# Atualizar vendedor
+def atualizar_vendedor (antigo_nomeVendedor, novo_nomeVendedor, novo_salarioFixo):
+    try:
+        # recebe vendedor
+        with open ("vendedor.txt", "r") as f:
+            linhas = f.readlines()
+        
+        # buscar vendedor
+        with open ("vendedor.txt", "w") as f:
+            encontrado = False
+            for linha in linhas:
+                codVendedor, nomeVendedor, salarioFixo, comissao = linha.strip().split(",")
+                if nomeVendedor == antigo_nomeVendedor:
+                    f.write (f"{codVendedor}, {novo_nomeVendedor}, {novo_salarioFixo}, {comissao}\n")
+                    encontrado = True
+                    print (f"O(a) vendedor(a) {novo_nomeVendedor}, antigo {antigo_nomeVendedor}, foi atualizado com sucesso.")
+                else:
+                    f.write(linha)
+
+                if not encontrado:
+                    print (f"Vendedor(a) {antigo_nomeVendedor} não foi encontrado(a). Encerrando ação.")
+
+    except FileNotFoundError:
+        print ("Arquivo não encontrado.")
+
+# Deletar vendedor
+def deletar_vendedor (apague_codVendedor):
+    try:
+        # receber lista
+        with open ("vendedor.txt", "r") as f:
+            linhas = f.readlines( )
+
+        # buscar codigo do vendedor a ser deletado
+        with open ("vendedor.txt", "w") as f:
+            encontrado = False
+            for linha in linhas:
+                codVendedor, nomeVendedor, salarioFixo, comissao = linha.strip().split(",")
+                if apague_codVendedor == codVendedor:
+                    encontrado = True
+                    print(f"Vendedor(a) {nomeVendedor}, de código {apague_codVendedor}, foi deletado(a).")
+                else:
+                    f.write(linha)
+                
+                if not encontrado:
+                    print (f"O código {apague_codVendedor}, não foi encontrado.")
+    
+    except FileNotFoundError:
+        print ("Arquivo não encontrado.")
+
+# Receber comissão
+def adicionar_comissao_vendedor (nomeVendedor, valor_venda):
+    try:
+        # receber vendedores
+        with open ("vendedor.txt", "r") as f:
+            linhas = f.readlines( )
+        
+        # buscar vendedor e aplicar comissao quando encontrar
+        with open ("vendedor.txt", "w") as f:
+            encontrado = False
+            for linha in linhas:
+                codVendedor, nomeVendedor, salarioFixo, comissao = linha.strip().split(",")
+                
+                # verificar se é o vendedor
+                if nomeVendedor in linha:
+                    encontrado = True
+                    # valor de comissao anterior mais percentual de 3% do total da nova venda
+                    comissao = comissao + (valor_venda * (3/100))
+                    f.write (f"{codVendedor}, {nomeVendedor}, {salarioFixo}, {comissao}\n")
+                else:
+                    print (f"Vendedor(a) {nomeVendedor} não encontrado(a).")
+
+    except FileNotFoundError:
+        print ("Arquivo não encontrado.")
+
+
+## Gerenciar Comprador ##
+# Atributos
+cpf:str
+email: str
+nomeComprador: str
+cep: str
+rua: str
+bairro: str
+cidade: str
+estado: str
+
+# Criar comprador
+def criar_comprador (cpf, email, nomeComprador, cep, rua, bairro, cidade, estado):
+    try:
+        # escreve novo comprador
+        with open ("comprador.txt", "a") as f:
+            f.write (f"{cpf}, {email}, {nomeComprador}, {cep}, {rua}, {bairro}, {cidade}, {estado}\n")
+            print (f"O comprador {nomeComprador}, foi registrado com sucesso.")
+
+    except FileNotFoundError:
+        print ("Arquivo não encontrado")
+
+# Ler comprador
+def ler_comprador ( ):
+    try:
+        with open ("comprador.txt", "r") as f:
+            for linha in f:
+                cpf, email, nomeComprador, cep, rua, bairro, cidade, estado = linha.strip().split(",")
+                print (f"Nome: {nomeComprador}, CPF: {cpf}, Contato: {email}, CEP:{cep}, Endereço: {rua}, {bairro}, {cidade}, {estado}")
+
+    except FileNotFoundError:
+        print ("Arquivo não encontrado.")
+
+# Atualizar comprador
+def atualizar_comprador (antigo_cpf, novo_cpf, novo_email, novo_nomeComprador, novo_cep, novo_rua, novo_bairro, novo_cidade, novo_estado):
+    try:
+        # recebe comprador
+        with open ("comprador.txt", "r") as f:
+            linhas = f.readlines()
+        
+        # buscar vendedor
+        with open ("comprador.txt", "w") as f:
+            encontrado = False
+            for linha in linhas:
+                cpf, email, nomeComprador, cep, rua, bairro, cidade, estado = linha.strip().split(",")
+                if novo_cpf == antigo_cpf:
+                    f.write (f"{novo_cpf}, {novo_email}, {novo_nomeComprador}, {novo_cep}, {novo_rua}, {novo_bairro}, {novo_cidade}, {novo_estado}\n")
+                    encontrado = True
+                    print (f"O(a) compador(a) {novo_nomeComprador}, foi atualizado com sucesso.")
+                else:
+                    f.write(linha)
+
+                if not encontrado:
+                    print (f"Vendedor(a) {antigo_cpf} não foi encontrado(a). Encerrando ação.")
+
+    except FileNotFoundError:
+        print ("Arquivo não encontrado.")
+
+# Deletar vendedor
+def deletar_vendedor (apague_codVendedor):
+    try:
+        # receber lista
+        with open ("vendedor.txt", "r") as f:
+            linhas = f.readlines( )
+
+        # buscar codigo do vendedor a ser deletado
+        with open ("vendedor.txt", "w") as f:
+            encontrado = False
+            for linha in linhas:
+                codVendedor, nomeVendedor, salarioFixo, comissao = linha.strip().split(",")
+                if apague_codVendedor == codVendedor:
+                    encontrado = True
+                    print(f"Vendedor(a) {nomeVendedor}, de código {apague_codVendedor}, foi deletado(a).")
+                else:
+                    f.write(linha)
+                
+                if not encontrado:
+                    print (f"O código {apague_codVendedor}, não foi encontrado.")
+    
+    except FileNotFoundError:
+        print ("Arquivo não encontrado.")
 
 
 ##### MAIN #####
@@ -168,6 +375,7 @@ def main():
                 case 2:
                     print ("\n")
                     printMenu("GProdutos")
+                    
                     # navegar menu
                     entrada = int (input ("Digite o menu desejado:  "))
                     match entrada:
@@ -201,6 +409,34 @@ def main():
                 case 3:
                     print ("\n")
                     printMenu("GVendedores")
+
+                    # nevegar menu
+                    entrada = int (input("Digite o menu desejado:  "))
+                    match entrada:
+                        # criar vendedor
+                        case 1:
+                            nomeVendedor = input ("Entrar com o nome do(a) vendedor(a) (Ex.: Caio):  ")
+                            salarioFixo = input ("Entrar com o salario fixo do(a) vendedor(a) (Ex.: 1500.00):  ")
+                            criar_vendedor (nomeVendedor, salarioFixo)
+
+                        # listar vendedores
+                        case 2:
+                            ler_vendedor()
+
+                        # Atualizar vendedor
+                        case 3:
+                            antigo_nomeVendedor = input ("Entrar com o antigo nome do(a) vendedor(a) (Ex.: Caio):  ")
+                            novo_nomeVendedor = input ("Entrar com novo nome do(a) vendedor(a) (Ex.: Pedro):  ")
+                            novo_salarioFixo = input ("Entrar com novo salario fixo do(a) vendedor(a) (Ex.: 2500.00):  ")
+                            atualizar_vendedor (antigo_nomeVendedor, novo_nomeVendedor, novo_salarioFixo)
+
+                        # Deletar vendedor
+                        case 4:
+                            codVendedor = input("Entre com o código do vendedor:  ")
+                            deletar_vendedor (codVendedor)
+
+                        case 0:
+                            print ("Retornando ao menu inicial.")
 
                 # Gerenciar Compradores
                 case 4:
