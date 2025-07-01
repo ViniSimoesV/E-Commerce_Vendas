@@ -87,67 +87,94 @@ def calc_preco_produto (preco_unitario, qtneDesejada_venda):
 
 # adicionar compra
 def criar_venda (cpf_comprador_venda, cod_produto_venda, qtneDesejada_venda, cod_vendedor_venda):
+    
     try:
         # recebe lista de produtos
         with open ("produto.txt", "r") as f:
-            linha_p = f.readlines()
+            produto_encontrado = False
+
+            for linha in f:
+                cod_produto, nome_produto, qtde_estoque, preco_unitario = linha.strip().split(", ")
+                if cod_produto_venda == cod_produto:
+                    produto_encontrado = True
+                    #info_produto = cod_produto, nome_produto, qtde_estoque, preco_unitario
+            
+            int_qtde_estoque = int(qtde_estoque)
+            int_qtneDesejada_venda = int(qtneDesejada_venda)
+
+            if int_qtde_estoque < int_qtneDesejada_venda:
+                print(f"Quantidade de produto não disponivel, apenas {qtde_estoque} em estoque. Cancelando venda. \n")
+                return 0
+            
+            if not produto_encontrado:
+                print("Produto não encontrado. Cancelando venda.")
+                return 0
 
         # recebe lista de vendedores
         with open ("vendedor.txt", "r") as f:
-            linha_v = f.readlines()
+            vendedor_encontrado = False
+            for linha in f:
+                cod_vendedor, nomeVendedor, salarioFixo, comissao = linha.strip().split(",")
+                if cod_vendedor_venda == cod_vendedor:
+                    vendedor_encontrado = True
+                    #info_vendedor = cod_vendedor, nomeVendedor, salarioFixo, comissao
+            if not vendedor_encontrado:
+                print("Vendedor não encontrado. Cancelando venda.")
+                return 0
 
         # recebe lista de compradores
         with open ("comprador.txt", "r") as f:
-            linha_c = f.readlines()
+            comprador_encontrado = False
+            for linha in f:
+                cpf_comprador, email, nomeComprador, cep, rua, bairro, cidade, estado = linha.strip().split(",")
+                if cpf_comprador_venda == cpf_comprador:
+                    comprador_encontrado = True
+            if not comprador_encontrado:
+                print("Comprador não encontrado. Cancelando venda.")
+                return 0
 
         # recebe código atual
         cod_venda_atual = gerar_prox_cod_venda()
 
-        # cria venda
+        # calcular valor total da compra do produto
+        valor_venda = calc_preco_produto (preco_unitario, qtneDesejada_venda)
+
+        # calcular frete
+        if valor_venda < 100.0:
+            valor_venda = valor_venda + 30.0
+        else:
+            if valor_venda < 301.0:
+                valor_venda = valor_venda + 20.0
+
+        # atribuir comissao
+        adicionar_comissao_vendedor (nomeVendedor, valor_venda)
+
+        # atualizar o estoque
+        atualizar_estoque (cod_produto, qtneDesejada_venda)
+
+        # converter valores para string
+        valor_venda = str (valor_venda)
+        cod_venda_atual = str(cod_venda_atual)
+
+        # criar venda
         with open ("notaFiscal.txt", "a") as f:
-            # encontrar produto
-            produto_encontrado = False
-            for linha_p in f:
-                cod_produto, nome_produto, qtde_estoque, preco_unitario = linha_p.strip().split(", ")
-                if cod_produto_venda == cod_produto:
-                    produto_encontrado = True
-                    info_produto = cod_produto, nome_produto, qtde_estoque, preco_unitario
-                if not produto_encontrado:
-                    return "Produto não encontrado. Cancelando venda. \n"
-            
-            # encontrar vendedor
-            vendedor_encontrado = False
-            for linha_v in f:
-                cod_vendedor, nomeVendedor, salarioFixo, comissao = linha_v.strip().split(",")
-                if cod_vendedor_venda == cod_vendedor:
-                    vendedor_encontrado = True
-                    info_vendedor = cod_vendedor, nomeVendedor, salarioFixo, comissao
-                if not vendedor_encontrado:
-                    return "Produto não encontrado. Cancelando venda. \n"
-
-            
-            # verificar se comprador existe no banco
-            comprador_encontrado = False
-            for linha_c in f:
-                cpf_comprador, email, nomeComprador, cep, rua, bairro, cidade, estado = linha_c.strip().split(",")
-                if cpf_comprador_venda == cpf_comprador:
-                    comprador_encontrado = True
-                if not comprador_encontrado:
-                    return "Comprador não encontrado. Cancelando venda. \n"
-            
-            # atualizar estoque
-
-            # calcular valor total da compra do produto
-            valor_venda = calc_preco_produto (preco_unitario, qtneDesejada_venda)
-
-            # calcular frete
-
-            # atribuir comissao
-
-            # salvar 
-            info_venda = info_produto + info_vendedor
+            # registra a venda 
+            #info_venda = info_produto + info_vendedor
             f.write (f"{cod_venda_atual}, {cpf_comprador_venda}, {nome_produto}, {cod_produto_venda}, {qtneDesejada_venda}, {preco_unitario}, {valor_venda}, {cod_vendedor_venda}\n")
-            print (f"Venda: {cod_venda_atual}, do cliente: {cpf_comprador_venda} finalizada com sucesso. Valor total a pagar: {valor_venda + frete}")
+            print (f"Venda: {cod_venda_atual}, do cliente: {cpf_comprador_venda} finalizada com sucesso. Valor total a pagar: {valor_venda}")
+
+        continuar_t = input ("Deseja continuar comprando?\n 0 - NÃO \n 1 - SIM\n")
+
+        if continuar_t == 0:
+            return 0
+        else:
+            if continuar_t == 1:
+                print ("Próximo produto...\n")
+                cpf_comprador_venda = input ("Entrar com CPF do comprador:  ")
+                cod_produto_venda = input ("Código do produto desejado:  ")
+                qtneDesejada_venda = input ("Quantidade desejado do produto:  ")
+                cod_vendedor_venda = input ("Qual código do vendedor atendente:  ")
+                criar_venda (cpf_comprador_venda, cod_produto_venda, qtneDesejada_venda, cod_vendedor_venda)
 
     except FileNotFoundError:
         print ("Arquivo não encontrado.")
@@ -158,7 +185,7 @@ def ler_venda ( ):
         with open ("notaFiscal.txt", "r") as f:
             for linha in f:
                 cod_venda_atual, cpf_comprador_venda, nome_produto, cod_produto_venda, qtneDesejada_venda, preco_unitario, valor_venda, cod_vendedor_venda = linha.strip().split(",")
-                print (f"{cod_venda_atual}, {cpf_comprador_venda}, {nome_produto}, {cod_produto_venda}, {qtneDesejada_venda}, {preco_unitario}, {valor_venda}, {cod_vendedor_venda}.")
+                print (f"\nCódigo da venda: {cod_venda_atual}, CPF comprador: {cpf_comprador_venda}, atendente: {cod_vendedor_venda}\n Dados do produto: \n->Nome: {nome_produto},\n->Cód: {cod_produto_venda}, \n->Quantidade: {qtneDesejada_venda}, \n->Preço: {preco_unitario}, \n->Valor da compra: {valor_venda}.")
 
     except FileNotFoundError:
         print ("Arquivo não encontrado.")
@@ -241,6 +268,36 @@ def deletar_produto (cod_produto):
     except FileNotFoundError:
         print ("Arquivo não encontrado.")
 
+# atualizar estoque
+# Receber comissão
+def atualizar_estoque (cod_produto, qtneDesejada_venda):
+    try:
+        # receber vendedores
+        with open ("produto.txt", "r") as f:
+            linhas = f.readlines( )
+        
+        # buscar vendedor e aplicar comissao quando encontrar
+        with open ("produto.txt", "a") as f:
+            encontrado = False
+            for linha in linhas:
+                cod_produto, nome_produto, qtde_estoque, preco_unitario = linha.strip().split(", ")
+                
+                # verificar se é o vendedor
+                if cod_produto in linha:
+                    encontrado = True
+
+                    qtde_estoque = int (qtde_estoque)
+                    qtneDesejada_venda = int(qtneDesejada_venda)
+                    qtde_estoque = qtneDesejada_venda - qtde_estoque
+                    f.write (f"{cod_produto}, {nome_produto}, {qtde_estoque}, {preco_unitario}\n")
+                else:
+                    f.write (linha)
+                
+                if not encontrado:
+                    print (f"Produto {nome_produto} não encontrado.")
+
+    except FileNotFoundError:
+        print ("Arquivo não encontrado.")
 
 ## Gerenciar Vendedores ##
 # Atributos
@@ -271,10 +328,18 @@ def criar_vendedor (nomeVendedor, salarioFixo):
         # recebe cod_vendedor atual
         cod_vendedor = gerar_prox_cod_vendedor()
         
+        # iniciar sem comissao
+        comissao = 0.00
+        
+        # calcular salario do mes
+        floatSalarioFixo = float(salarioFixo)
+        floatComissao = float(comissao)
+        salarioMes = floatSalarioFixo + floatComissao
+        salarioMes = salarioFixo + comissao
+
         # escreve novo vendedor
         with open ("vendedor.txt", "a") as f:
-            comissao = 0.00
-            f.write (f"{cod_vendedor}, {nomeVendedor}, {salarioFixo}, {comissao}\n")
+            f.write (f"{cod_vendedor}, {nomeVendedor}, {salarioFixo}, {comissao}, {salarioMes}\n")
             print (f"O vendedor {nomeVendedor}, de codigo {cod_vendedor}, foi registrado com sucesso.")
 
     except FileNotFoundError:
@@ -362,7 +427,7 @@ def adicionar_comissao_vendedor (nomeVendedor, valor_venda):
             linhas = f.readlines( )
         
         # buscar vendedor e aplicar comissao quando encontrar
-        with open ("vendedor.txt", "w") as f:
+        with open ("vendedor.txt", "a") as f:
             encontrado = False
             for linha in linhas:
                 cod_vendedor, nomeVendedor, salarioFixo, comissao = linha.strip().split(",")
@@ -370,10 +435,15 @@ def adicionar_comissao_vendedor (nomeVendedor, valor_venda):
                 # verificar se é o vendedor
                 if nomeVendedor in linha:
                     encontrado = True
+
                     # valor de comissao anterior mais percentual de 3% do total da nova venda
+                    comissao = float(comissao)
                     comissao = comissao + (valor_venda * (3/100))
                     f.write (f"{cod_vendedor}, {nomeVendedor}, {salarioFixo}, {comissao}\n")
                 else:
+                    f.write (linha)
+                
+                if not encontrado:
                     print (f"Vendedor(a) {nomeVendedor} não encontrado(a).")
 
     except FileNotFoundError:
