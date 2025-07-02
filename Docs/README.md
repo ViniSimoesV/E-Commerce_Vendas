@@ -314,6 +314,7 @@ que podem estar dentro de outras funções ou do código principal.
 |  Arquivo com 3 linhas |            4            |             sim             |
 
 
+
 |  **Teste 2 - Calcular preço total do produto**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
@@ -326,6 +327,7 @@ que podem estar dentro de outras funções ou do código principal.
 | valor = 5.00, qtde = -1 |  Erro, valor negativo   |             sim             |
 | valor = -5.00, qtde = 1 |  Erro, valor negativo   |             sim             |
 | valor = 5.00, qtde = 0  |  Erro, valor negativo   |             sim             |
+
 
 
 |  **Teste 3 - Adicionar ao carrinho**   |
@@ -353,6 +355,231 @@ que podem estar dentro de outras funções ou do código principal.
 | Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
 | Carrinho com 1 produto  | Produto X comprado, valor Y        |             sim             |
 | Carrinho com 2 produto  | Produto X comprado, valor Y; Produto Z comprado, valor W | sim   |
+
+
+
+|  **Teste 5 - Ver carrinho**   |
+|        **Entradas**           |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                         | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Lista do carrinho está vazia. | Carrinho exite                    | O carrinho está vazio. Adicione produtos!    | Não criou lista carrinho                         | O carrinho está vazio...    |
+
+|     **Entradas**             |      **Resultado**                 |        **Aprovado?**        |
+|        :---:                 |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+| Carrinho com 1 produto  | Produto X comprado, valor Y        |             sim             |
+| Carrinho com 2 produto  | Produto X comprado, valor Y; Produto Z comprado, valor W | sim   |
+
+
+
+|  **Teste 6 - Ler Notas Fiscais**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhuma compra feita ainda.                  | Não criou arquivo "notaFisal"                    | Nenhuma compra feita ainda. |
+
+|     **Entradas**      |     **Resultado**                 |        **Aprovado?**        |
+|        :---:          |       :---:                       |            :---:            |
+|      Arquivo vazio    | Nenhuma nota fical encontrada     |             sim             |
+|  Arquivo com 1 linhas | Mostrar a linha do arquivo        |             sim             |
+|  Arquivo com 2 linhas | Mostrar as 2 linhas do arquivo    |             sim             |
+|  Arquivo com 3 linhas | Mostrar as 3 linhas do arquivo    |             sim             |
+
+
+
+|  **Teste 7 - Criar produto**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 8 - Ler Produtos**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**      |     **Resultado**                 |        **Aprovado?**        |
+|        :---:          |       :---:                       |            :---:            |
+|      Arquivo vazio    | Nenhum produto encontrada         |             sim             |
+|  Arquivo com 1 linhas | Mostrar a linha do arquivo        |             sim             |
+|  Arquivo com 2 linhas | Mostrar as 2 linhas do arquivo    |             sim             |
+|  Arquivo com 3 linhas | Mostrar as 3 linhas do arquivo    |             sim             |
+
+
+
+
+|  **Teste 9 - Atualizar produto**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 10 - Deletar produto**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 11 - Atualizar o estoque**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 12 - Gerar próximo cód de vendedor**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 13 - Criar vendedor**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 14 - Ler Vendedores**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**      |     **Resultado**                 |        **Aprovado?**        |
+|        :---:          |       :---:                       |            :---:            |
+|      Arquivo vazio    | Nenhum vendedor encontrado        |             sim             |
+|  Arquivo com 1 linhas | Mostrar a linha do arquivo        |             sim             |
+|  Arquivo com 2 linhas | Mostrar as 2 linhas do arquivo    |             sim             |
+|  Arquivo com 3 linhas | Mostrar as 3 linhas do arquivo    |             sim             |
+
+
+
+
+|  **Teste 15 - Ler Vendedores Atendendo**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**      |     **Resultado**                 |        **Aprovado?**        |
+|        :---:          |       :---:                       |            :---:            |
+|      Arquivo vazio    | Nenhum vendedor encontrado        |             sim             |
+|  Arquivo com 1 linhas | Mostrar a linha do arquivo        |             sim             |
+|  Arquivo com 2 linhas | Mostrar as 2 linhas do arquivo    |             sim             |
+|  Arquivo com 3 linhas | Mostrar as 3 linhas do arquivo    |             sim             |
+
+
+
+
+|  **Teste 16 - Atualizar vendedor**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 17 - Deletar vendedor**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 18 - Adicionar comissao vendedor**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 19 - Criar comprador**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 20 - Ler comprador**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**      |     **Resultado**                 |        **Aprovado?**        |
+|        :---:          |       :---:                       |            :---:            |
+|      Arquivo vazio    | Nenhum comprador encontrado       |             sim             |
+|  Arquivo com 1 linhas | Mostrar a linha do arquivo        |             sim             |
+|  Arquivo com 2 linhas | Mostrar as 2 linhas do arquivo    |             sim             |
+|  Arquivo com 3 linhas | Mostrar as 3 linhas do arquivo    |             sim             |
+
+
+
+
+|  **Teste 21 - Atualizar comprador**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 22 - Deletar comprador**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+
+
+
+
+|  **Teste 23 - Fluxo do sistema**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
 
 
 
