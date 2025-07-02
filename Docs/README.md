@@ -140,49 +140,164 @@ que podem estar dentro de outras funções ou do código principal.
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
 | Carrinho vazio              | Carrinho existes                  | O carrinho está vazio. Adicione produtos!    | Não criou lista carrinho                         | O carrinho está vazio...    |
-| Carrinho com itens          | Carrinho existes        | Produtos XX comprados com sucesso. Nota fiscal gerada    | Não criou lista carrinho             | Produtos comprados e nota fiscal gerada    |
+| Carrinho com itens          | Carrinho existes        | Produtos XX comprados com sucesso. Nota fiscal gerada  | Não criou lista carrinho             | Produtos comprados e nota fiscal gerada    |
 
 
-#### Caso de teste 5: XX
-
-|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
-| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
-
-
-#### Caso de teste 6: XX
+#### Caso de teste 5: Ver carrinho
 
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Lista do carrinho está vazia. | Carrinho exite                  | O carrinho está vazio. Adicione produtos!    | Não criou lista carrinho                         | O carrinho está vazio...    |
+| Lista do carrinho cheio     | Carrinho exite                    | Exibir lista de produtos registrado          | Não criou lista carrinho                         | Lista de dos produtos no carrinho.|
 
 
-#### Caso de teste 7: XX
-
-|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
-| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
-
-
-#### Caso de teste 8: XX
+#### Caso de teste 6: Ler Notas Fiscais
 
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhuma compra feita ainda.                  | Não criou arquivo "notaFisal"                    | Nenhuma compra feita ainda. |
+| Arquivo preenchido.         | Arquivo exites.                   | Imprimir registros do arquivo.               | Não criou arquivo "notaFisal"                | Lista de todos registros do arquivo. |
 
 
-#### Caso de teste 9: XX
+#### Caso de teste 7: Criar produto
 
-|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
-| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
-
-
-#### Caso de teste 10: XX
-
-|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
-| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**             |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                    | :---:                       |
+| Entrada com parâmetros incorretos | Arquivo "produto.txt" existe. | Entradas invorretas. Cadastro cancelado.   | Arquivo "produto.txt" não existe.        | Cadastro não efetuado       |
+| Entrada com parâmetros corretos | Arquivo "produto.txt" existe. | Cadastro realizado com sucesso.              | Arquivo "produto.txt" não existe.        | Cadastro efetuado com sucesso |
 
 
-#### Caso de teste X: XX
+#### Caso de teste 8: Ler Produtos
 
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhuma compra feita ainda.                  | Não criou arquivo "produtos.txt"                 | Nenhuma produto registrado. |
+| Arquivo preenchido.         | Arquivo exites.                   | Imprimir registros do arquivo.               | Não criou arquivo "produtos.txt"          | Imprimir produtos registros no arquivo. |
+
+
+#### Caso de teste 9: Atualizar produto
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Cód. antigo e novos dados   | Arquivo "produtos.txt" existe     | Reescrita dos dados corretamente             | Arquivo "produtos.txt" não existe   | Atualização correta dos dados no arquivo |
+| Cód. antigo e dados repetidos | Arquivo "produtos.txt" existe   | Reescreve os dados da mesma forma            | Arquivo "produtos.txt" não existe      | Reescrita dos mesmos dados no arquivo |
+
+
+#### Caso de teste 10: Deletar produto
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| cod_produto_para_deletar existente em produto.txt | cod_produto_para_deletar correspondente a um produto existente. | Produto removido de produto.txt e mensagem de sucesso. | cod_produto_para_deletar não encontrado | Mensagem "O produto ... foi encontrado e deletado." |
+| cod_produto_para_deletar não existente em produto.txt | cod_produto_para_deletar correspondente a um produto existente. | Produto não foi encontrado no produto.txt. | cod_produto_para_deletar não encontrado | Mensagem "O produto ... não foi encontrado." |
+
+
+#### Caso de teste 11: Atualizar o estoque
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| cod_produto_escolhido existe, qtneDesejada_venda <= estoque. | Produto encontrado e quantidade em estoque suficiente. | Estoque do produto atualizado em produto.txt, retorna True. | cod_produto_escolhido não encontrado | Mensagem "Produto de código ... foi encontrado no estoque.", retorna False |
+| cod_produto_escolhido existe, qtneDesejada_venda > estoque. | Produto encontrado e quantidade em estoque suficiente. | Estoque do produto atualizado em produto.txt, retorna True. | Produto encontrado, mas quantidade em estoque insuficiente. | Quantidade de produto ... em estoque ... insuficiente...", retorna False. |
+
+
+#### Caso de teste 12: Gerar próximo cód de vendedor
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vendedor.txt vazio| Início da contagem                | "1". Caso arquivo não encontrado, sinalizar. | Arquivo vendedor.txt com linhas mal formatadas | "1"                         |
+| Arquivo vendedor.txt com 3 linhas| Continuição da contagem    | "4"                                          | Arquivo vendedor.txt com linhas mal formatadas | "4"                         |
+
+
+#### Caso de teste 13: Criar vendedor
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**             |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                    | :---:                       |
+| nomeVendedor único, salarioFixo numérico. | Dados de vendedor válidos e nomeVendedor não existente | Vendedor adicionado a vendedor.txt com novo código e mensagem de sucesso.   | nomeVendedor já existe | Vendedor adicionado a vendedor.txt com novo código e mensagem de sucesso.       |
+| nomeVendedor repetido, salarioFixo numérico. | Dados de vendedor válidos e nomeVendedor não existente | Vendedor já existente, mensagem de erro.   | nomeVendedor já existe  | Vendedor já existe, mensagem de erro. |
+
+
+#### Caso de teste 14: Ler Vendedores
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhuma compra feita ainda.                  | Não criou arquivo "vendedor.txt"                 | Nenhuma produto registrado. |
+| Arquivo preenchido.         | Arquivo exites.                   | Imprimir registros do arquivo.               | Não criou arquivo "vendedor.txt"          | Imprimir produtos registros no arquivo. |
+
+
+#### Caso de teste 15: Ler Vendedores Atendendo
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhuma compra feita ainda.                  | Não criou arquivo "vendedor.txt"                 | Nenhuma produto registrado. |
+| Arquivo preenchido.         | Arquivo exites.                   | Imprimir registros do arquivo.               | Não criou arquivo "vendedor.txt"          | Imprimir produtos registros no arquivo. |
+
+
+#### Caso de teste 16: Atualizar vendedor
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Cód. antigo e novos dados   | Arquivo "vendedor.txt" existe     | Reescrita dos dados corretamente             | Arquivo "vendedor.txt" não existe   | Atualização correta dos dados no arquivo |
+| Cód. antigo e dados repetidos | Arquivo "vendedor.txt" existe   | Reescreve os dados da mesma forma            | Arquivo "vendedor.txt" não existe      | Reescrita dos mesmos dados no arquivo |
+
+
+#### Caso de teste 17: Deletar vendedor
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| cod_vendedor_para_deletar existente em vendedor.txt | cod_vendedor_para_deletar correspondente a um vendedor existente. | Vendedor removido de vendedor.txt e mensagem de sucesso. | cod_vendedor_para_deletar não encontrado | Mensagem "O vendedor ... foi encontrado e deletado." |
+| cod_vendedor_para_deletar não existente em vendedor.txt | cod_vendedor_para_deletar correspondente a um vendedor existente. | Vendedor não foi encontrado no vendedor.txt. | cod_vendedor_para_deletar não encontrado | Mensagem "O vendedor ... não foi encontrado." |
+
+
+#### Caso de teste 18: Adicionar comissao vendedor
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| nomeVendedor_atendendo existe, valor_venda numérico. | Vendedor encontrado e valor_venda válido. | Comissão e salário do mês do vendedor atualizados em vendedor.txt. | nomeVendedor_atendendo não encontrado | Comissão e salário do mês do vendedor atualizados em vendedor.txt. |
+| nomeVendedor_atendendo não existe, valor_venda numérico. | Vendedor encontrado e valor_venda válido. | Vendedores não encontrado no vendedor.txt. | nomeVendedor_atendendo não encontrado | Vendedores não encontrado no vendedor.txt |
+
+
+#### Caso de teste 19: Criar comprador
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**             |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                    | :---:                       |
+| cpf_comprador único, demais dados válidos. | Dados de comprador válidos e cpf_comprador não existente. | Comprador adicionado a comprador.txt e mensagem de sucesso. | cpf_comprador já existe em comprador.txt | Comprador adicionado a comprador.txt e mensagem de sucesso. |
+| cpf_comprador repetido, demais dados válidos. | Dados de comprador válidos e cpf_comprador não existente. | Comprador já registrado no comprador.txt, mensagem de erro "comprador já registrado". | cpf_comprador já existe em comprador.txt | Comprador já registrado no comprador.txt, mensagem de erro "comprador já registrado". |
+
+
+#### Caso de teste 20: Ler comprador
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhum comprador registrado ainda.           | Não criou arquivo "comprador.txt"                | Nenhuma comprador registrado. |
+| Arquivo preenchido.         | Arquivo exites.                   | Imprimir registros do arquivo.               | Não criou arquivo "comprador.txt"          | Imprimir produtos registros no arquivo. |
+
+
+#### Caso de teste 21: Atualizar comprador
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| antigo_cpf_comprador existente, novos dados válidos. | antigo_cpf_comprador correspondente a um comprador existente, novos dados válidos. | Comprador atualizado em comprador.txt e mensagem de sucesso. | antigo_cpf_comprador não encontrado | Comprador atualizado em comprador.txt e mensagem de sucesso. |
+| antigo_cpf_comprador repetido, novos dados válidos. | antigo_cpf_comprador correspondente a um comprador existente, novos dados válidos. | Comprador já registrado comprador.txt, reescreve mesmos dados e mensagem de sucesso. | antigo_cpf_comprador não encontrado | Comprador atualizado em comprador.txt e mensagem de sucesso. |
+
+
+#### Caso de teste 22: Deletar comprador
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| apagar_cpf_comprador existente em comprador.txt. | apagar_cpf_comprador correspondente a um comprador existente. | Comprador removido de comprador.txt e mensagem de sucesso. | apagar_cpf_comprador não encontrado | Comprador removido de comprador.txt e mensagem de sucesso. |
+| apagar_cpf_comprador não existente em comprador.txt. | apagar_cpf_comprador correspondente a um comprador existente. | Comprador não encontrado no arquivo comprador.txt, mensagem de alerta. | apagar_cpf_comprador não encontrado | Comprador não encontrado no arquivo comprador.txt, mensagem de alerta. |
+
+
+#### Caso de teste 23: Fluxo do sistema
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| acessar menu de gerenciamento de vendedores. | Todos menus se interligam corretamente | Acesso menu de gerenciamento de compradores. | Menu interrompe o processo | Menu de gerenciamento de compradores acessado com mensagem de sucesso. |
+| acessar menu de gerenciamento de produtps. | Todos menus se interligam corretamente | Acesso menu de gerenciamento de produtos. | Menu interrompe o processo | Menu de gerenciamento de produtos acessado com mensagem de sucesso. |
+
+
+
+
+
 
 #### Rélatorio de Execução de Teste
 
