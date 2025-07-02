@@ -111,12 +111,134 @@ O projeto, feito na linguagem Python, é um E-commerce de venda e compra de prod
 Os casos de teste englobam todo o código, uma vez que as funções devem receber parâmetros
 que podem estar dentro de outras funções ou do código principal.
 
-#### Caso de teste 1: Cadastro de Filme
-(montar tabela[Entradas, Classes Válidas, Resultado Esperado, Classes Inválidas, Resultado])
+#### Caso de teste 1: Gerar próximo cód de venda
 
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo notaFiscal.txt vazio| Início da contagem                | "1". Caso arquivo não encontrado, sinalizar. | Arquivo notaFiscal.txt com linhas mal formatadas | "1"                         |
+| Arquivo notaFiscal.txt com 3 linhas| Continuição da contagem    | "4"                                          | Arquivo notaFiscal.txt com linhas mal formatadas | "4"                         |
+
+
+#### Caso de teste 2: Calcular preço total do produto
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Valor unitário do produto = 2.00 e quantidade comprada = 2. | Produto existente, estoque disponivel |  4.00    | Produto não existe ou sem estoque.               | 4.00                        |
+| Valor unitário do produto = 2.00 e quantidade comprada = -2.| Produto existente, estoque disponivel |  Erro, valor não poder ser negativo. | Produto não existe ou sem estoque. | Erro...       |
+
+
+#### Caso de teste 3: Adicionar ao carrinho
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| CPF, CodProduto, Qtde, CodVendedor | Arquivos produto.txt, vendedor.txt, comprador.txt possuem os registro | Produto adicionado ao carrinho | Ao menos um dos arquivos não possui a entrada| Produto adicionado... |
+| CPF, CodProduto, Qtde, -CodVendedor | Arquivos produto.txt, vendedor.txt, comprador.txt possuem os registro | Vendedor não encontrado, cancela pedido | Ao menos um dos arquivos não possui a entrada| Pedido cancelado... |
+
+
+#### Caso de teste 4: Finalizar compra
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Carrinho vazio              | Carrinho existes                  | O carrinho está vazio. Adicione produtos!    | Não criou lista carrinho                         | O carrinho está vazio...    |
+| Carrinho com itens          | Carrinho existes        | Produtos XX comprados com sucesso. Nota fiscal gerada    | Não criou lista carrinho             | Produtos comprados e nota fiscal gerada    |
+
+
+#### Caso de teste 5: XX
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+
+#### Caso de teste 6: XX
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+
+#### Caso de teste 7: XX
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+
+#### Caso de teste 8: XX
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+
+#### Caso de teste 9: XX
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+
+#### Caso de teste 10: XX
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+
+
+#### Caso de teste X: XX
+
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
 
 #### Rélatorio de Execução de Teste
-(montar tabela)
+
+|  **Teste 1 - Gerar próximo cód de venda**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo notaFiscal.txt vazio| Início da contagem                | "1". Caso arquivo não encontrado, sinalizar. | Arquivo notaFiscal.txt com linhas mal formatadas | "1"                         |
+
+|    **Entradas**       |      **Resultado**      |        **Aprovado?**        |
+|       :---:           |        :---:            |            :---:            |
+|     Arquivo vazio     |            1            |             sim             |
+|  Arquivo com 1 linhas |            2            |             sim             |
+|  Arquivo com 2 linhas |            3            |             sim             |
+|  Arquivo com 3 linhas |            4            |             sim             |
+
+
+|  **Teste 2 - Calcular preço total do produto**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Valor unitário do produto = 2.00 e quantidade comprada = 2. | Produto existente, estoque disponivel |  4.00    | Produto não existe ou sem estoque.               | 4.00                        |
+
+|     **Entradas**        |      **Resultado**      |        **Aprovado?**        |
+|        :---:            |        :---:            |            :---:            |
+| valor = 5.00, qtde = 1  |          5.00           |             sim             |
+| valor = 10.00, qtde = 2 |          20.00          |             sim             |
+| valor = 5.00, qtde = -1 |  Erro, valor negativo   |             sim             |
+| valor = -5.00, qtde = 1 |  Erro, valor negativo   |             sim             |
+| valor = 5.00, qtde = 0  |  Erro, valor negativo   |             sim             |
+
+
+|  **Teste 3 - Adicionar ao carrinho**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| 10010010010, 001, 3, 4 | Arquivos produto.txt, vendedor.txt, comprador.txt possuem os registro | Produto adicionado ao carrinho | Ao menos um dos arquivos não possui a entrada| Produto adicionado... |
+
+|     **Entradas**        |      **Resultado**           |        **Aprovado?**        |
+|        :---:            |        :---:                 |            :---:            |
+| 10010010010, 001, 3, 4  | Adicionado ao carrinho       |             sim             |
+| 20020020020, 001, -4, 1 | Erro, quantidade negativa    |             sim             |
+| 10010010010, 007, 1, -2 | Erro, vendedor não existe    |             sim             |
+| 10010010010, -001, 3, 9 | Erro, produto não encontrado |             sim             |
+
+
+
+
+|  **Teste 4 - Fechar ao carrinho**   |
+|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Carrinho vazio              | Carrinho existes                  | O carrinho está vazio. Adicione produtos!    | Não criou lista carrinho                         | O carrinho está vazio...    |
+
+|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
+|        :---:            |        :---:                       |            :---:            |
+| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+| Carrinho com 1 produto  | Produto X comprado, valor Y        |             sim             |
+| Carrinho com 2 produto  | Produto X comprado, valor Y; Produto Z comprado, valor W | sim   |
+
 
 
 ## Código fonte com testes automatizados
