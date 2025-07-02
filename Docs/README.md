@@ -386,12 +386,15 @@ que podem estar dentro de outras funções ou do código principal.
 
 
 |  **Teste 7 - Criar produto**   |
-|        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
-| :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+|           **Entradas**         |        **Classes Válidas**          |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
+| :---:                          | :---:                               | :---:                                        | :---:                                            | :---:                       |
+| Entrada com parâmetros incorretos | Arquivo "produto.txt" existe.    | Entradas invorretas. Cadastro cancelado.     | Arquivo "produto.txt" não existe.                | Cadastro não efetuado       |
 
-|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
-|        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+|     **Entradas**        |      **Resultado**                        |        **Aprovado?**        |
+|        :---:            |        :---:                              |            :---:            |
+| Parâmetros incorretos   | Parâmetro X incorreto. Criação cancelado. |             sim             |
+| Parâmetros corretos     | Criação finalizada com sucesso.           |             sim             |
+| Parâmetros a mais       | Parâmetro X incorreto. Criação cancelado. |             sim             |
 
 
 
@@ -399,6 +402,7 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 8 - Ler Produtos**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhuma compra feita ainda.                  | Não criou arquivo "produtos.txt"                 | Nenhuma produto registrado. |
 
 |     **Entradas**      |     **Resultado**                 |        **Aprovado?**        |
 |        :---:          |       :---:                       |            :---:            |
@@ -413,21 +417,27 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 9 - Atualizar produto**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Cód. antigo e novos dados   | Arquivo "produtos.txt" existe     | Reescrita dos dados corretamente             | Arquivo "produtos.txt" não existe   | Atualização correta dos dados no arquivo |
 
-|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
-|        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
 
+|     **Entradas**           |            **Resultado**                  |        **Aprovado?**        |
+|        :---:               |        :---:                              |            :---:            |
+| Cód. antigo e novos dados. | Atualização correta dos dados no arquivo. |             sim             |
+| Cód. antigo e mesmos dados.| Atualização correta dos dados no arquivo. |             sim             |
+| Cód. incorreto e novos dados. | Código não encontrado no arquivo "produto.txt". Atualização cancelada |  sim  |
+| Cód. correto e novos dados incorretos. | Dados incorretos. Atualização cancelada |   sim             |
 
 
 
 |  **Teste 10 - Deletar produto**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| cod_produto_para_deletar existente em produto.txt | cod_produto_para_deletar correspondente a um produto existente. | Produto removido de produto.txt e mensagem de sucesso. | cod_produto_para_deletar não encontrado | Mensagem "O produto ... foi encontrado e deletado." |
 
 |     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
 |        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+| Código correto.         | Produto removido do registro do "produto.txt". | sim             |
+| Código incorreto. | Produto não encontrado no registro do "produto.txt". Produto não deletado. | sim |
 
 
 
@@ -435,10 +445,14 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 11 - Atualizar o estoque**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| cod_produto_escolhido existe, qtneDesejada_venda <= estoque. | Produto encontrado e quantidade em estoque suficiente. | Estoque do produto atualizado em produto.txt, retorna True. | cod_produto_escolhido não encontrado | Mensagem "Produto de código ... foi encontrado no estoque.", retorna False |
 
 |     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
 |        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+| Cód. antigo e novos dados. | Atualização correta dos dados no arquivo. |             sim             |
+| Cód. antigo e mesmos dados.| Atualização correta dos dados no arquivo. |             sim             |
+| Cód. incorreto e novos dados. | Código não encontrado no arquivo "produto.txt". Atualização cancelada |  sim  |
+| Cód. correto e novos dados incorretos. | Dados incorretos. Atualização cancelada |   sim             |
 
 
 
@@ -446,10 +460,14 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 12 - Gerar próximo cód de vendedor**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vendedor.txt vazio  | Início da contagem                | "1". Caso arquivo não encontrado, sinalizar. | Arquivo vendedor.txt com linhas mal formatadas   | "1"                         |
 
 |     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
 |        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+|     Arquivo vazio       |            1            |             sim             |
+|  Arquivo com 1 linhas   |            2            |             sim             |
+|  Arquivo com 2 linhas   |            3            |             sim             |
+|  Arquivo com 3 linhas   |            4            |             sim             |
 
 
 
@@ -457,10 +475,13 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 13 - Criar vendedor**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| nomeVendedor único, salarioFixo numérico. | Dados de vendedor válidos e nomeVendedor não existente | Vendedor adicionado a vendedor.txt com novo código e mensagem de sucesso.   | nomeVendedor já existe | Vendedor adicionado a vendedor.txt com novo código e mensagem de sucesso.       |
 
 |     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
 |        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+| Parâmetros incorretos   | Parâmetro X incorreto. Criação cancelado. |             sim             |
+| Parâmetros corretos     | Criação finalizada com sucesso.           |             sim             |
+| Parâmetros a mais       | Parâmetro X incorreto. Criação cancelado. |             sim             |
 
 
 
@@ -468,6 +489,7 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 14 - Ler Vendedores**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhuma compra feita ainda.                  | Não criou arquivo "vendedor.txt"                 | Nenhuma produto registrado. |
 
 |     **Entradas**      |     **Resultado**                 |        **Aprovado?**        |
 |        :---:          |       :---:                       |            :---:            |
@@ -482,6 +504,7 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 15 - Ler Vendedores Atendendo**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhuma compra feita ainda.                  | Não criou arquivo "vendedor.txt"                 | Nenhuma produto registrado. |
 
 |     **Entradas**      |     **Resultado**                 |        **Aprovado?**        |
 |        :---:          |       :---:                       |            :---:            |
@@ -496,10 +519,14 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 16 - Atualizar vendedor**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Cód. antigo e novos dados   | Arquivo "vendedor.txt" existe     | Reescrita dos dados corretamente             | Arquivo "vendedor.txt" não existe   | Atualização correta dos dados no arquivo |
 
 |     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
 |        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+| Nome antigo e novos dados. | Atualização correta dos dados no arquivo. |             sim             |
+| Nome antigo e mesmos dados.| Atualização correta dos dados no arquivo. |             sim             |
+| Nome incorreto e novos dados. | Vendedor não encontrado no arquivo "vendedor.txt". Atualização cancelada |  sim  |
+| Nome correto e novos dados incorretos. | Dados incorretos. Atualização cancelada |   sim             |
 
 
 
@@ -507,10 +534,12 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 17 - Deletar vendedor**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| cod_vendedor_para_deletar existente em vendedor.txt | cod_vendedor_para_deletar correspondente a um vendedor existente. | Vendedor removido de vendedor.txt e mensagem de sucesso. | cod_vendedor_para_deletar não encontrado | Mensagem "O vendedor ... foi encontrado e deletado." |
 
-|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
-|        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+|     **Entradas**    |                  **Resultado**                   |           **Aprovado?**          |
+|        :---:        |        :---:                                     |            :---:                 |
+| Nome correto.       | Vendedor removido do registro do "vendedor.txt". | sim                              |
+| Nome incorreto.     | Vendedor não encontrado no registro do "vendedor.txt". Vendedor não deletado. | sim |
 
 
 
@@ -518,10 +547,15 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 18 - Adicionar comissao vendedor**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| nomeVendedor_atendendo existe, valor_venda numérico. | Vendedor encontrado e valor_venda válido. | Comissão e salário do mês do vendedor atualizados em vendedor.txt. | nomeVendedor_atendendo não encontrado | Comissão e salário do mês do vendedor atualizados em vendedor.txt. |
 
-|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
-|        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+|                  **Entradas**              |                            **Resultado**                        |        **Aprovado?**        |
+|        :---:                               |        :---:                                                    |            :---:            |
+| Nome do vendedor existente, valor da venda | Comissão atualizada no arquivo "vendedor.txt" para o vendedor X |             sim             |
+| Nome do vendedor existente, valor da venda incorreto | Valor invalido, processo cancelado                    |             sim             |
+| Nome do vendedor não existente, valor da venda |Vendedor não encontrado no arquivo "vendedor.txt", processo cancelado |       sim          |
+| Nome do vendedor não existente, valor da venda incorreta |Vendedor não encontrado no arquivo "vendedor.txt", processo cancelado |   sim    |
+
 
 
 
@@ -529,10 +563,13 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 19 - Criar comprador**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| cpf_comprador único, demais dados válidos. | Dados de comprador válidos e cpf_comprador não existente. | Comprador adicionado a comprador.txt e mensagem de sucesso. | cpf_comprador já existe em comprador.txt | Comprador adicionado a comprador.txt e mensagem de sucesso. |
 
 |     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
 |        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+| Parâmetros incorretos   | Parâmetro X incorreto. Criação cancelado. |             sim             |
+| Parâmetros corretos     | Criação finalizada com sucesso.           |             sim             |
+| Parâmetros a mais       | Parâmetro X incorreto. Criação cancelado. |             sim             |
 
 
 
@@ -540,6 +577,7 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 20 - Ler comprador**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Arquivo vazio.              | Arquivo exites.                   | Nenhum comprador registrado ainda.           | Não criou arquivo "comprador.txt"                | Nenhuma comprador registrado. |
 
 |     **Entradas**      |     **Resultado**                 |        **Aprovado?**        |
 |        :---:          |       :---:                       |            :---:            |
@@ -554,10 +592,14 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 21 - Atualizar comprador**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| antigo_cpf_comprador existente, novos dados válidos. | antigo_cpf_comprador correspondente a um comprador existente, novos dados válidos. | Comprador atualizado em comprador.txt e mensagem de sucesso. | antigo_cpf_comprador não encontrado | Comprador atualizado em comprador.txt e mensagem de sucesso. |
 
 |     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
 |        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+| CPF antigo e novos dados. | Atualização correta dos dados no arquivo. |             sim             |
+| CPF antigo e mesmos dados.| Atualização correta dos dados no arquivo. |             sim             |
+| CPF incorreto e novos dados. | CPF não encontrado no arquivo "comprador.txt". Atualização cancelada |  sim  |
+| CPF correto e novos dados incorretos. | Dados incorretos. Atualização cancelada |   sim             |
 
 
 
@@ -565,10 +607,12 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 22 - Deletar comprador**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| apagar_cpf_comprador existente em comprador.txt. | apagar_cpf_comprador correspondente a um comprador existente. | Comprador removido de comprador.txt e mensagem de sucesso. | apagar_cpf_comprador não encontrado | Comprador removido de comprador.txt e mensagem de sucesso. |
 
 |     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
 |        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+| CPF correto.       | Comprador removido do registro do "comprador.txt". | sim                              |
+| CPF incorreto.     | CPF não encontrado no registro do "comprador.txt". Comprador não deletado. | sim |
 
 
 
@@ -576,10 +620,15 @@ que podem estar dentro de outras funções ou do código principal.
 |  **Teste 23 - Fluxo do sistema**   |
 |        **Entradas**         |        **Classes Válidas**        |        **Resultado Esperado**                |        **Classes Inválidas**                     |        **Resultado**        |
 | :---:                       | :---:                             | :---:                                        | :---:                                            | :---:                       |
+| Valor inteiro de 0 a 4      | Todos menus se interligam corretamente | Acesso menu determinado pelo número inteiro. | Valor invalido o processo | Acesso menu determinado pelo número inteiro acessado com sucesso, exibido na tela. |
 
-|     **Entradas**        |      **Resultado**                 |        **Aprovado?**        |
-|        :---:            |        :---:                       |            :---:            |
-| Carrinho vazio          | Carrinho vazio, adicione produtos! |             sim             |
+|     **Entradas**        |      **Resultado**            |        **Aprovado?**        |
+|        :---:            |        :---:                  |            :---:            |
+|       Valor: 1          | Mostrar menu de vendas        |             sim             |
+|       Valor: 2          | Mostrar menu de produtos      |             sim             |
+|       Valor: 3          | Mostrar menu de vendedores    |             sim             |
+|       Valor: 4          | Mostrar menu de compradores   |             sim             |
+|       Valor: 0          | Finalizar execução do sistema |             sim             |
 
 
 
