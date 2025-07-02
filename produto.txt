@@ -1,4 +1,4 @@
-001, Tomada, 50, 2.50
-002, Tomada Cara, 80, 3.80
-001, Tomada, -38, 2.50
-002, Tomada Cara, -68, 3.80
+001, Tomada, 68, 2.50
+002, Tomada Cara, 88, 3.80
+003, Lampada, 88, 5.90
+005, Gibi Turma da Monica, 50, 2.90

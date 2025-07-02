@@ -1,1 +1,2 @@
-10010010010, email@real, Caio C., 10100100, Gaspar, Coreu, BH, MG
+10010010020, novo@email, Miguel, 60600600, Jose Pinto, Tavares, campos, RJ
+30030030030, rico@email, ricardo, 40400400, Aaa, Balao, RJ, RJ
